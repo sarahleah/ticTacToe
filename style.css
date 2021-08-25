@@ -10,6 +10,7 @@
     grid-template-rows: repeat(3, 1fr);
 }
 .game-tile {
+    color: white;
     border: 2px solid black;
     height: 100%;
     width: 100%;
