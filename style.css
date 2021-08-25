@@ -3,7 +3,23 @@
     padding: 0;
 }
 body {
+    background-color: #002626;
     text-align: center;
+    color: #EFE7DA;
+}
+header {
+    background-color: #EFE7DA;
+    color: #002626
+}
+.reset-btn {
+    background-color: #22AAA1;
+}
+#py1 {
+    background-color: #22AAA1;
+    color: #002626;
+}
+#py2 {
+    background-color: #FE654F;
 }
 .players {
     display: flex;
@@ -17,11 +33,16 @@ body {
     grid-template-rows: repeat(3, 1fr);
 }
 .game-tile {
-    color: white;
-    border: 2px solid black;
+    color: #EFE7DA;
+    border-radius: 50% 1%;
+    font-size: 1rem;
+    border: 2px solid #002626;
     height: 100%;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+button.game-tile {
+    background-color: #EFE7DA;   
 }

@@ -42,7 +42,7 @@ function handleTurn(event) {
 function handleReset() {
     gameTiles.forEach(tile => tile.textContent = '#')
     gameTiles.forEach(tile => tile.disabled = false)
-    gameTiles.forEach(tile => tile.style.color = 'white')
+    gameTiles.forEach(tile => tile.style.color = '#EFE7DA')
     resultPara.textContent = 'New Game!'
 }
 
