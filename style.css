@@ -1,29 +1,49 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
-body {
+.dark {
     background-color: #002626;
-    text-align: center;
     color: #EFE7DA;
 }
-header {
+.light {
     background-color: #EFE7DA;
     color: #002626
 }
-.reset-btn {
-    background-color: #22AAA1;
+.accent1 {
+    background-color: #FE654F;
+    color: #EFE7DA;
 }
-#py1 {
+.accent2 {
     background-color: #22AAA1;
     color: #002626;
 }
-#py2 {
-    background-color: #FE654F;
+body {
+    font-family: 'Oswald', sans-serif;
+    text-align: center;
+}
+.b-text {
+    font-family: 'Lustria', serif;
+}
+header {
+    padding: 3vh;
+    font-size: 3vh;
 }
 .players {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
+    padding: 1rem;
+    font-size: 1.5rem;
+    min-height: 13vh;
+    margin: 1rem;
+}
+h3 {
+    margin-bottom: 0.25rem;
+}
+section {
+    padding: 1rem;
+    border-radius: 2rem;
 }
 .game-board {
     height: 300px;
@@ -31,18 +51,33 @@ header {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
+    margin: 1rem auto;
 }
 .game-tile {
     color: #EFE7DA;
-    border-radius: 50% 1%;
+    border-radius: 10%;
     font-size: 1rem;
-    border: 2px solid #002626;
+    border: none;
     height: 100%;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: all 300ms linear;
 }
 button.game-tile {
-    background-color: #EFE7DA;   
+    border: 2px solid #002626;
+}
+.result {
+    margin: 1rem;
+    font-size: 3rem;
+    transition: all 300ms linear;
+}
+.reset-btn {
+    min-width: 150px;
+    padding: 0.5rem 0;
+    border-radius: 2rem;
+    font-size: 1.5rem;
+    border: none;
+    margin: 1rem;
 }

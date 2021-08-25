@@ -24,7 +24,6 @@ function handleTurn(event) {
     }
 
     let [winner, outcome] = checkForWin(gameMatrix)
-    console.log(winner, outcome)
 
     if (outcome) {
         resultPara.textContent = `${winner} wins!`

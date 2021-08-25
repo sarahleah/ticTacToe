@@ -5,20 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chicle&family=Cinzel+Decorative:wght@900&family=Fjalla+One&family=Oswald:wght@500&family=Playfair+Display+SC:ital,wght@1,700&family=Sacramento&family=Ultra&family=Yeseva+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Alice&family=EB+Garamond:ital,wght@1,500&family=Josefin+Sans:wght@300&family=Lato:ital,wght@1,300&family=Lustria&family=Montserrat:wght@500&family=Quattrocento&family=Slabo+27px&family=Source+Sans+Pro&family=Space+Mono&display=swap" rel="stylesheet">
     <title>Tic Tac Toe</title>
 </head>
-<body>
-    <header>
+<body class="dark">
+    <header class="light">
         <h1>Tic Tac Toe</h1>
     </header>
     <div class=players>
-        <section id='py1'>
+        <section class="accent1">
             <h3>Player One:</h3>
-            <p class="py1-score">0</p>
+            <p class="py1-score b-text">0</p>
         </section>
-        <section id='py2'>
+        <section class="accent2">
             <h3>Player Two:</h3>
-            <p class="py2-score">0</p>
+            <p class="py2-score b-text">0</p>
         </section>
     </div>
     <div class="game-board">
@@ -39,9 +43,10 @@
         </div>
     </div>
     <div>
-        <p class="result">Start playing</p>
+        <p class="result b-text">Start playing</p>
     </div>
-    <button class="reset-btn">Reset</button>
+    <button id="reset" class="reset-btn accent1 b-text">Reset</button>
+    <p class="secret b-text">press spacebar for a fun surprise</p>
     <script src="main.js"></script>
     <script src="themes.js"></script>
 </body>
