@@ -1,0 +1,19 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.game-board {
+    height: 300px;
+    width: 300px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+}
+.game-tile {
+    border: 2px solid black;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
