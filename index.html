@@ -8,23 +8,40 @@
     <title>Tic Tac Toe</title>
 </head>
 <body>
+    <header>
+        <h1>Tic Tac Toe</h1>
+    </header>
+    <div class=players>
+        <section>
+            <h3>Player One:</h3>
+            <p class="py1-score">0</p>
+        </section>
+        <section>
+            <h3>Player Two:</h3>
+            <p class="py2-score">0</p>
+        </section>
+    </div>
     <div class="game-board">
         <div class="column">
-            <div class="x00 game-tile">#</div>
-            <div class="x10 game-tile">#</div>
-            <div class="x20 game-tile">#</div>
+            <button class="game-tile">#</button>
+            <button class="game-tile">#</button>
+            <button class="game-tile">#</button>
         </div>
         <div class="column">
-            <div class="x01 game-tile">#</div>
-            <div class="x11 game-tile">#</div>
-            <div class="x21 game-tile">#</div>
+            <button class="game-tile">#</button>
+            <button class="game-tile">#</button>
+            <button class="game-tile">#</button>
         </div>
         <div class="column">
-            <div class="x02 game-tile">#</div>
-            <div class="x12 game-tile">#</div>
-            <div class="x22 game-tile">#</div>
+            <button class="game-tile">#</button>
+            <button class="game-tile">#</button>
+            <button class="game-tile">#</button>
         </div>
     </div>
+    <div>
+        <p class="result">Start playing</p>
+    </div>
+    <button class="reset-btn">Reset</button>
     <script src="main.js"></script>
 </body>
 </html>

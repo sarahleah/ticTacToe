@@ -1,19 +1,49 @@
 let gameBoard = document.querySelector('.game-board')
+let gameTiles = document.querySelectorAll('.game-tile')
 let columns = document.querySelectorAll('.column')
+let resultPara = document.querySelector('.result')
+let resetBtn = document.querySelector('.reset-btn')
+let p1Score = document.querySelector('.py1-score')
+let p2Score = document.querySelector('.py2-score')
 
 gameBoard.addEventListener('click', handleTurn)
+resetBtn.addEventListener('click', handleReset)
 
 let counter = 0
 
 function handleTurn(event) {
+
     let selectedTile = event.target
     printLetter(selectedTile)
-    let result = checkForWin(makeGameMatrix())
-    if (result) {
-        console.log('win')
-    } else {
-        console.log('nothing yet')
+    let gameMatrix = makeGameMatrix()
+    let catsGame = checkForCats(gameMatrix)
+
+    if (catsGame === true) {
+        gameTiles.forEach(tile => tile.disabled = true)
+        resultPara.textContent = 'Cats game'
     }
+
+    let [winner, outcome] = checkForWin(gameMatrix)
+    console.log(winner, outcome)
+
+    if (outcome) {
+        resultPara.textContent = `${winner} wins!`
+        if (winner === 'X') {
+            let currScore = Number(p1Score.textContent)
+            p1Score.textContent = ++currScore
+        } else if (winner === 'O') {
+            let currScore = Number(p2Score.textContent)
+            p2Score.textContent = ++currScore
+        }
+        gameTiles.forEach(tile => tile.disabled = true)
+    }
+}
+
+function handleReset() {
+    gameTiles.forEach(tile => tile.textContent = '#')
+    gameTiles.forEach(tile => tile.disabled = false)
+    gameTiles.forEach(tile => tile.style.color = 'white')
+    resultPara.textContent = 'New Game!'
 }
 
 function printLetter(selectedTile) {
@@ -39,6 +69,11 @@ function makeGameMatrix() {
     return matrix
 }
 
+function checkForCats(matrix) {
+    let allSpaces = matrix.flat()
+    return (allSpaces.includes('#') ? false : true)
+}
+
 function checkForWin(matrix) {
     // returns true for win
     // returns false for loss
@@ -47,8 +82,6 @@ function checkForWin(matrix) {
     let x1 = matrix[1]
     let x2 = matrix[2]
 
-    console.log(x0, x1, x2)
-
     const testX = (element) => {
          return element === 'X'
     }
@@ -56,22 +89,23 @@ function checkForWin(matrix) {
         return element === 'O'
     }
     for (let column of matrix) {
-        if (column.every(testX) || column.every(testO)) {
-            return true
+        if (column.every(testX)) {
+            return ['X', true]
+        } else if (column.every(testO)) {
+            return ['O', true]
         }
     }
     for (let y in matrix) {
         y = Number(y)
-        console.log(typeof x)
         if (x0[y] === x1[y] && x1[y] === x2[y] && x0[y] !== '#') {
-            return true
+            return [x0[y], true]
         }
     }
     if (x0[0] === x1[1] && x1[1] === x2[2] && x0[0] !== '#') {
-        return true
+        return [x0[0], true]
     }
     if (x0[2] === x1[1] && x1[1] === x2[0] && x0[2] !== '#') {
-        return true
+        return [x0[2], true]
     }
-    return false
+    return ['#', false]
 }
