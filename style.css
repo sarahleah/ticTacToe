@@ -84,7 +84,7 @@ section {
     margin: 1rem auto;
 }
 .game-tile {
-    color: #EFE7DA;
+    color: #FFF;
     border-radius: 10%;
     font-size: 1rem;
     border: none;
@@ -110,4 +110,5 @@ button.game-tile {
     font-size: 1.5rem;
     border: none;
     margin: 1rem;
+    font-family: inherit;
 }

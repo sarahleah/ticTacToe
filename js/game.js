@@ -10,14 +10,14 @@ let changeIconBtn = document.querySelector('.pop-up-btn')
 let X
 let O
 
-changeIconBtn.addEventListener('click', changeIcons())
+changeIconBtn.addEventListener('click', changeIcons)
 gameBoard.addEventListener('click', handleTurn)
 resetBtn.addEventListener('click', handleReset)
 
 function changeIcons() {
     let pl1Checked = document.querySelector('input[name="pl1-icons"]:checked')
     let pl2Checked = document.querySelector('input[name="pl2-icons"]:checked')
-    if (!pl1Checked || !pl2Checked) {
+    if (pl1Checked === null || pl2Checked === null) {
         X = 'X'
         O = 'O'
     } else {
@@ -46,10 +46,10 @@ function handleTurn(event) {
 
     if (outcome) {
         resultPara.textContent = `${winner} wins!`
-        if (winner === 'X') {
+        if (winner === X) {
             let currScore = Number(p1Score.textContent)
             p1Score.textContent = ++currScore
-        } else if (winner === 'O') {
+        } else if (winner === O) {
             let currScore = Number(p2Score.textContent)
             p2Score.textContent = ++currScore
         }
@@ -67,9 +67,9 @@ function handleReset() {
 function printLetter(selectedTile) {
     if (selectedTile.textContent === '#') {
         if (counter % 2 === 0) {
-            selectedTile.textContent = 'X'
+            selectedTile.textContent = X
         } else {
-            selectedTile.textContent = 'O'
+            selectedTile.textContent = O
         }
         selectedTile.style.color = 'black'
         counter++
@@ -101,16 +101,16 @@ function checkForWin(matrix) {
     let x2 = matrix[2]
 
     const testX = (element) => {
-         return element === 'X'
+         return element === X
     }
     const testO = element => {
-        return element === 'O'
+        return element === O
     }
     for (let column of matrix) {
         if (column.every(testX)) {
-            return ['X', true]
+            return [X, true]
         } else if (column.every(testO)) {
-            return ['O', true]
+            return [O, true]
         }
     }
     for (let y in matrix) {
