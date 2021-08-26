@@ -15,7 +15,6 @@ let lightEls = document.querySelectorAll('.light')
 let acc1Els = document.querySelectorAll('.accent1')
 let acc2El = document.querySelector('.accent2')
 let bodyText = document.querySelectorAll('.b-text')
-let resetColorBtn = document.querySelector('#reset')
 
 document.body.addEventListener('keyup', handleThemeChange)
 
@@ -40,13 +39,14 @@ function changeColors() {
         let newLight = generateColor()
 
         checkFontColor(lightEls, newLight[2])
-        lightEls.forEach(element => element.style.backgroundColor = arrayToHSL(newLight))
+        let lightElsColor = arrayToHSL(newLight)
+        lightEls.forEach(element => element.style.backgroundColor = lightElsColor)
 
         let newAcc1 = generateColor()
 
         checkFontColor(acc1Els, newAcc1[2])
-        acc1Els.forEach(element => element.style.backgroundColor = arrayToHSL(newAcc1))
-        resetColorBtn.backgroundColor = arrayToHSL(newAcc1)
+        let acc1ElsColor = arrayToHSL(newAcc1)
+        acc1Els.forEach(element => element.style.backgroundColor = acc1ElsColor)
 
         let newAcc2 = generateColor()
 
@@ -96,8 +96,7 @@ function changeFonts() {
     let bodyFontItems = document.querySelectorAll('.b-text')
     bodyFontItems.forEach(element => element.style.fontFamily = randomBodyFont)
 }
-// TODO: reset button not changing color
-// TODO: add change fonts
-// TODO: add custom board
-// TODO: add custom icons
+
+// TODO: add custom size board
+// TODO: add custom text icons
 // TODO: add localStorage
