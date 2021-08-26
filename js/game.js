@@ -44,7 +44,7 @@ function handleTurn(event) {
     let [winner, outcome] = checkForWin(gameMatrix)
 
     if (outcome) {
-        
+
         if (winner === X) {
             let currScore = Number(p1Score.textContent)
             p1Score.textContent = ++currScore
@@ -168,6 +168,6 @@ function checkForWin(matrix) {
     if (testResult) {
         return [testResult, true]
     }
-
+    
     return ['#', false]
 }
