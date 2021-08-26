@@ -8,16 +8,7 @@
 // font-family: 'Yeseva One', cursive;
 
 // BODY 
-// font-family: 'Alice', serif;
-// font-family: 'EB Garamond', serif;
-// font-family: 'Josefin Sans', sans-serif;
-// font-family: 'Lato', sans-serif;
-// font-family: 'Lustria', serif;
-// font-family: 'Montserrat', sans-serif;
-// font-family: 'Quattrocento', serif;
-// font-family: 'Slabo 27px', serif;
-// font-family: 'Source Sans Pro', sans-serif;
-// font-family: 'Space Mono', monospace;
+
 
 let darkEl = document.querySelector('.dark')
 let lightEls = document.querySelectorAll('.light')
@@ -30,12 +21,20 @@ document.body.addEventListener('keyup', handleThemeChange)
 
 function handleThemeChange(event) {
     if (event.keyCode === 32) {
-        let newDark = generateColor()
+        changeColors()
+        changeFonts()
+    }
+}
+
+function changeColors() {
+    let newDark = generateColor()
+
         if (newDark[2] < 50) {
             darkEl.style.color = '#EFE7DA'
         } else {
             darkEl.style.color = '#000'
         }
+
         darkEl.style.backgroundColor = arrayToHSL(newDark)
 
         let newLight = generateColor()
@@ -56,10 +55,8 @@ function handleThemeChange(event) {
         } else {
             acc2El.style.color = '#000'
         }
+
         acc2El.style.backgroundColor = arrayToHSL(newAcc2)
-
-
-    }
 }
 
 function generateColor() {
@@ -83,3 +80,24 @@ function arrayToHSL(array) {
     array = array.join(',')
     return `hsl(${array})`
 }
+
+function changeFonts() {
+    let headerFonts = [ "'Chicle', cursive", "'Cinzel Decorative', cursive", "'Fjalla One', sans-serif", "'Oswald', sans-serif", "'Playfair Display SC', serif", "'Sacramento', cursive", "'Ultra', serif", "'Yeseva One', cursive"
+    ]
+    let bodyFonts = ["'Alice', serif","'EB Garamond', serif","'Josefin Sans', sans-serif","'Lato', sans-serif","'Lustria', serif","'Montserrat', sans-serif","'Quattrocento', serif","'Slabo 27px', serif","'Source Sans Pro', sans-serif","'Space Mono', monospace",
+    ]
+    let randomHeaderFont = headerFonts[Math.floor(Math.random() * headerFonts.length)]
+    console.log(randomHeaderFont)
+
+    let randomBodyFont = bodyFonts[Math.floor(Math.random() * bodyFonts.length)]
+    console.log(randomBodyFont)
+
+    document.body.style.fontFamily = randomHeaderFont
+    let bodyFontItems = document.querySelectorAll('.b-text')
+    bodyFontItems.forEach(element => element.style.fontFamily = randomBodyFont)
+}
+// TODO: reset button not changing color
+// TODO: add change fonts
+// TODO: add custom board
+// TODO: add custom icons
+// TODO: add localStorage
