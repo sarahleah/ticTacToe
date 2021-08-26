@@ -11,6 +11,7 @@ let X
 let O
 
 changeIconBtn.addEventListener('click', changeIcons)
+
 gameBoard.addEventListener('click', handleTurn)
 resetBtn.addEventListener('click', handleReset)
 
@@ -24,8 +25,6 @@ function changeIcons() {
         X = pl1Checked.value
         O = pl2Checked.value
     }
-    console.log(pl1Checked, pl2Checked)
-    console.log(X, O)
 }
 
 let counter = 0
@@ -45,7 +44,7 @@ function handleTurn(event) {
     let [winner, outcome] = checkForWin(gameMatrix)
 
     if (outcome) {
-        resultPara.textContent = `${winner} wins!`
+        
         if (winner === X) {
             let currScore = Number(p1Score.textContent)
             p1Score.textContent = ++currScore
@@ -53,6 +52,16 @@ function handleTurn(event) {
             let currScore = Number(p2Score.textContent)
             p2Score.textContent = ++currScore
         }
+        if (winner === X) {
+            winner = document.querySelector('.accent1 > h3').textContent.split('')
+        } else {
+            winner = document.querySelector('.accent2 > h3').textContent.split('')
+        }
+
+        winner.pop()
+        winner = winner.join('')
+        
+        resultPara.textContent = `${winner} wins!`
         gameTiles.forEach(tile => tile.disabled = true)
     }
 }
@@ -96,34 +105,69 @@ function checkForWin(matrix) {
     // returns true for win
     // returns false for loss
 
-    let x0 = matrix[0]
-    let x1 = matrix[1]
-    let x2 = matrix[2]
-
+    // checks if every element in an array is X
     const testX = (element) => {
          return element === X
     }
+
+    // checks if every element in an array is X
     const testO = element => {
         return element === O
     }
+
+    function runTests(array) {
+        if (array.every(testX)) {
+            return X
+        } else if (array.every(testO)) {
+            return O
+        }
+        return false
+    }
+
+    // for each column of matrix -> checks if it passes above tests
     for (let column of matrix) {
-        if (column.every(testX)) {
-            return [X, true]
-        } else if (column.every(testO)) {
-            return [O, true]
+        let testResult = runTests(column)
+        if (testResult) {
+            return [testResult, true]
         }
     }
-    for (let y in matrix) {
-        y = Number(y)
-        if (x0[y] === x1[y] && x1[y] === x2[y] && x0[y] !== '#') {
-            return [x0[y], true]
+
+    // checks for diag up
+    let rowTestArray = []
+    let rowNum = 0
+    while (rowNum < matrix.length) {
+        matrix.forEach(column => {
+            rowTestArray.push(column[rowNum])
+        })
+        let testResult = runTests(rowTestArray)
+        if (testResult) {
+            return [testResult, true]
         }
+        rowTestArray.length = 0
+        rowNum++
     }
-    if (x0[0] === x1[1] && x1[1] === x2[2] && x0[0] !== '#') {
-        return [x0[0], true]
+
+    let i = 0
+    for (let column of matrix) {
+        rowTestArray.push(column[i])
+        i++
     }
-    if (x0[2] === x1[1] && x1[1] === x2[0] && x0[2] !== '#') {
-        return [x0[2], true]
+    let testResult = runTests(rowTestArray)
+    if (testResult) {
+        return [testResult, true]
     }
+    rowTestArray.length = 0
+
+    i = matrix.length - 1
+    for (let column of matrix) {
+        rowTestArray.push(column[i])
+        i--
+    }
+
+    testResult = runTests(rowTestArray)
+    if (testResult) {
+        return [testResult, true]
+    }
+
     return ['#', false]
 }
