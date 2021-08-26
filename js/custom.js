@@ -8,6 +8,8 @@ let overlay = document.querySelector('.overlay')
 let radios = document.querySelectorAll('input[type="radio"]')
 let ply1Icons = document.querySelectorAll('input[name="pl1-icons"]')
 let ply2Icons = document.querySelectorAll('input[name="pl2-icons"]')
+let gameBoardDiv = document.querySelector('.game-board')
+let boardSize = document.querySelector('.grid-size')
 
 radios.forEach(element => element.addEventListener('click', handleRadioClick))
 
@@ -41,6 +43,7 @@ function handleRadioClick(event) {
 
 function handlePopUp() {
     changeNames()
+    makeBoard()
     popUp.style.display = 'none';
     popUp.style.zIndex = -1;
     overlay.style.opacity = 1;
@@ -62,3 +65,24 @@ function changeNames() {
     }
 }
 
+function makeBoard() {
+    let gridSize = Number(boardSize.value)
+    for (let i = 0; i < gridSize; i ++) {
+        let div = document.createElement('div')
+        div.setAttribute('class', 'column')
+        gameBoardDiv.appendChild(div)
+        let columns = document.querySelectorAll('.column')
+        let column = columns[i]
+        for (let j = 0; j < gridSize; j++) {
+            let button = document.createElement('button')
+            button.setAttribute('class', 'game-tile')
+            button.textContent = '#'
+            column.appendChild(button)
+        }
+    }
+    gameBoardDiv.style.display = 'grid'
+    gameBoardDiv.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`
+    console.log(gridSize)
+}
+
+// TODO: make pop-up the settings menu

@@ -1,6 +1,4 @@
 let gameBoard = document.querySelector('.game-board')
-let gameTiles = document.querySelectorAll('.game-tile')
-let columns = document.querySelectorAll('.column')
 let resultPara = document.querySelector('.result')
 let resetBtn = document.querySelector('.reset-btn')
 let p1Score = document.querySelector('.py1-score')
@@ -30,7 +28,7 @@ function changeIcons() {
 let counter = 0
 
 function handleTurn(event) {
-
+    let gameTiles = document.querySelectorAll('button.game-tile')
     let selectedTile = event.target
     printLetter(selectedTile)
     let gameMatrix = makeGameMatrix()
@@ -67,6 +65,7 @@ function handleTurn(event) {
 }
 
 function handleReset() {
+    let gameTiles = document.querySelectorAll('button.game-tile')
     gameTiles.forEach(tile => tile.textContent = '#')
     gameTiles.forEach(tile => tile.disabled = false)
     gameTiles.forEach(tile => tile.style.color = '#EFE7DA')
@@ -88,6 +87,7 @@ function printLetter(selectedTile) {
 function makeGameMatrix() {
     let matrix = []
     let whitespaceRX = /\s/g
+    let columns = document.querySelectorAll('.column')
     for (let div of columns) {
         let columnContent
         columnContent = div.textContent.replace(whitespaceRX, '').split('')
@@ -168,6 +168,6 @@ function checkForWin(matrix) {
     if (testResult) {
         return [testResult, true]
     }
-    
+
     return ['#', false]
 }
