@@ -1,15 +1,3 @@
-// font-family: 'Chicle', cursive;
-// font-family: 'Cinzel Decorative', cursive;
-// font-family: 'Fjalla One', sans-serif;
-// font-family: 'Oswald', sans-serif;
-// font-family: 'Playfair Display SC', serif;
-// font-family: 'Sacramento', cursive;
-// font-family: 'Ultra', serif;
-// font-family: 'Yeseva One', cursive;
-
-// BODY 
-
-
 let darkEl = document.querySelector('.dark')
 let lightEls = document.querySelectorAll('.light')
 let acc1Els = document.querySelectorAll('.accent1')
@@ -96,7 +84,3 @@ function changeFonts() {
     let bodyFontItems = document.querySelectorAll('.b-text')
     bodyFontItems.forEach(element => element.style.fontFamily = randomBodyFont)
 }
-
-// TODO: add custom size board
-// TODO: add custom text icons
-// TODO: add localStorage
