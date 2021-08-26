@@ -5,9 +5,28 @@ let resultPara = document.querySelector('.result')
 let resetBtn = document.querySelector('.reset-btn')
 let p1Score = document.querySelector('.py1-score')
 let p2Score = document.querySelector('.py2-score')
+let changeIconBtn = document.querySelector('.pop-up-btn')
 
+let X
+let O
+
+changeIconBtn.addEventListener('click', changeIcons())
 gameBoard.addEventListener('click', handleTurn)
 resetBtn.addEventListener('click', handleReset)
+
+function changeIcons() {
+    let pl1Checked = document.querySelector('input[name="pl1-icons"]:checked')
+    let pl2Checked = document.querySelector('input[name="pl2-icons"]:checked')
+    if (!pl1Checked || !pl2Checked) {
+        X = 'X'
+        O = 'O'
+    } else {
+        X = pl1Checked.value
+        O = pl2Checked.value
+    }
+    console.log(pl1Checked, pl2Checked)
+    console.log(X, O)
+}
 
 let counter = 0
 

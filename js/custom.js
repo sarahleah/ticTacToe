@@ -37,8 +37,6 @@ function handleRadioClick(event) {
         })
     }
     let valueToRemove = selectedRadio.value
-    if (selectedRadio)
-    console.log(selectedRadio, valueToRemove)
 }
 
 function handlePopUp() {
@@ -49,7 +47,6 @@ function handlePopUp() {
 }
 
 function handleEnterForPopUp(event) {
-    console.log(event.keyCode)
     if (event.keyCode === 13) {
         handlePopUp()
     }
@@ -64,3 +61,4 @@ function changeNames() {
         play2Name.textContent = pl2NameInput.value + ':'
     }
 }
+
