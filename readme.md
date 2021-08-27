@@ -39,7 +39,7 @@ To run this project, you can download the source code, or see it live at https:/
 Unsolved Problems:
 -------------------
 
-- Currently there is no way to save player data -
+- Currently there is no way to save player data
 - When an outcome occurs, the # that hold the space in the buttons all become visible. This is difficult to fix because the translucent appearance of the buttons indicates their utility well, but because of the color changing background, it is difficult to find a solution that makes the text invisible.
 - I would like to have a more succinct solution to the win/lose problem. 
 
