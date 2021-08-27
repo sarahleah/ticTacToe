@@ -4,12 +4,12 @@ A simple game app created with HTML, CSS and JavaScript.
 
 **See it live at: https://sarahleah.github.io/ticTacToe/**
 
-*[Technologies](#technologies-used)
-*[Approach](#approach)
-*[Lessons Learned](#lessons-learned)
-*[Setup](#setup)
-*[Unsolved Problems](#unsolved-problems)
-*[Future Additions](#future-additions)
+* [Technologies](#technologies-used)
+* [Approach](#approach)
+* [Lessons Learned](#lessons-learned)
+* [Setup](#setup)
+* [Unsolved Problems](#unsolved-problems)
+* [Future Additions](#future-additions)
 
 Technologies used:
 --------------------
