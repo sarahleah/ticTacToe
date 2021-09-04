@@ -8,7 +8,6 @@ let overlay = document.querySelector('.overlay')
 let radios = document.querySelectorAll('input[type="radio"]')
 let ply1Icons = document.querySelectorAll('input[name="pl1-icons"]')
 let ply2Icons = document.querySelectorAll('input[name="pl2-icons"]')
-let gameBoardDiv = document.querySelector('.game-board')
 let boardSize = document.querySelector('.grid-size')
 
 radios.forEach(element => element.addEventListener('click', handleRadioClick))
@@ -18,27 +17,24 @@ popUp.addEventListener('keyup', handleEnterForPopUp)
 
 function handleRadioClick(event) {
     let selectedRadio = event.target
-    let valueToDisable = selectedRadio.value
+
     if (selectedRadio.name === 'pl1-icons') {
-        ply2Icons.forEach(element => {
-            if (element.value === valueToDisable) {
-                element.disabled = true
-            }
-            else {
-                element.disabled = false
-            }
-        })
+        disableRadioBtn(ply2Icons, selectedRadio)
     } else if (selectedRadio.name === 'pl2-icons') {
-        ply1Icons.forEach(element => {
-            if (element.value === valueToDisable) {
-                element.disabled = true
-            }
-            else {
-                element.disabled = false
-            }
-        })
+        disableRadioBtn(ply1Icons, selectedRadio)
     }
-    let valueToRemove = selectedRadio.value
+}
+
+function disableRadioBtn(iconSet, buttonToDisable) {
+    let valueToDisable = buttonToDisable.value
+    iconSet.forEach(element => {
+        if (element.value === valueToDisable) {
+            element.disabled = true
+        }
+        else {
+            element.disabled = false
+        }
+    })
 }
 
 function handlePopUp() {
@@ -70,19 +66,23 @@ function makeBoard() {
     for (let i = 0; i < gridSize; i ++) {
         let div = document.createElement('div')
         div.setAttribute('class', 'column')
-        gameBoardDiv.appendChild(div)
+        gameBoard.appendChild(div)
         let columns = document.querySelectorAll('.column')
         let column = columns[i]
-        for (let j = 0; j < gridSize; j++) {
-            let button = document.createElement('button')
-            button.setAttribute('class', 'game-tile')
-            button.textContent = '#'
-            column.appendChild(button)
-        }
+
+        addButtons(gridSize, column)
     }
-    gameBoardDiv.style.display = 'grid'
-    gameBoardDiv.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`
-    console.log(gridSize)
+    gameBoard.style.display = 'grid'
+    gameBoard.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`
+}
+
+function addButtons(gridSize, column) {
+    for (let j = 0; j < gridSize; j++) {
+        let button = document.createElement('button')
+        button.setAttribute('class', 'game-tile')
+        button.textContent = '#'
+        column.appendChild(button)
+    }
 }
 
 // TODO: make pop-up the settings menu

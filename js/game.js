@@ -8,6 +8,8 @@ let changeIconBtn = document.querySelector('.pop-up-btn')
 let X
 let O
 
+let counter = 0
+
 changeIconBtn.addEventListener('click', changeIcons)
 
 gameBoard.addEventListener('click', handleTurn)
@@ -25,7 +27,6 @@ function changeIcons() {
     }
 }
 
-let counter = 0
 
 function handleTurn(event) {
     let gameTiles = document.querySelectorAll('button.game-tile')
@@ -42,26 +43,29 @@ function handleTurn(event) {
     let [winner, outcome] = checkForWin(gameMatrix)
 
     if (outcome) {
-
-        if (winner === X) {
-            let currScore = Number(p1Score.textContent)
-            p1Score.textContent = ++currScore
-        } else if (winner === O) {
-            let currScore = Number(p2Score.textContent)
-            p2Score.textContent = ++currScore
-        }
-        if (winner === X) {
-            winner = document.querySelector('.accent1 > h3').textContent.split('')
-        } else {
-            winner = document.querySelector('.accent2 > h3').textContent.split('')
-        }
-
-        winner.pop()
-        winner = winner.join('')
-        
-        resultPara.textContent = `${winner} wins!`
+        outcomeDetermined(winner)
         gameTiles.forEach(tile => tile.disabled = true)
     }
+}
+
+function outcomeDetermined(winner) {
+    if (winner === X) {
+    let currScore = Number(p1Score.textContent)
+    p1Score.textContent = ++currScore
+    } else if (winner === O) {
+        let currScore = Number(p2Score.textContent)
+        p2Score.textContent = ++currScore
+    }
+    if (winner === X) {
+        winner = document.querySelector('.accent1 > h3').textContent.split('')
+    } else {
+        winner = document.querySelector('.accent2 > h3').textContent.split('')
+    }
+
+    winner.pop()
+    winner = winner.join('')
+
+    resultPara.textContent = `${winner} wins!`
 }
 
 function handleReset() {
@@ -89,8 +93,7 @@ function makeGameMatrix() {
     let whitespaceRX = /\s/g
     let columns = document.querySelectorAll('.column')
     for (let div of columns) {
-        let columnContent
-        columnContent = div.textContent.replace(whitespaceRX, '').split('')
+        let columnContent = div.textContent.replace(whitespaceRX, '').split('')
         matrix.push(columnContent)
     }
     return matrix
@@ -106,12 +109,12 @@ function checkForWin(matrix) {
     // returns false for loss
 
     // checks if every element in an array is X
-    const testX = (element) => {
+    function testX(element) {
          return element === X
     }
 
     // checks if every element in an array is X
-    const testO = element => {
+    function testO (element) {
         return element === O
     }
 
@@ -124,50 +127,72 @@ function checkForWin(matrix) {
         return false
     }
 
-    // for each column of matrix -> checks if it passes above tests
-    for (let column of matrix) {
-        let testResult = runTests(column)
-        if (testResult) {
-            return [testResult, true]
+    function checkForColumnWins() {
+        // for each column of matrix -> checks if it passes above tests
+        for (let column of matrix) {
+            let testResult = runTests(column)
+            if (testResult) {
+                return [testResult, true]
+            }
         }
     }
 
-    // checks for diag up
     let rowTestArray = []
-    let rowNum = 0
-    while (rowNum < matrix.length) {
-        matrix.forEach(column => {
-            rowTestArray.push(column[rowNum])
-        })
+    
+    if (checkForColumnWins()) {
+        return checkForColumnWins()
+    }  else if (checkForRowWin()) {
+         return checkForRowWin()
+     } else if (checkForDiagLeftTopDown()) {
+         return checkForDiagLeftTopDown()
+     } else if (checkForDiagRightTopDown()) {
+         return checkForDiagRightTopDown()
+     } else {
+         return ['#', false]
+     }
+    
+     function checkForRowWin() {
+         // checks for row win
+         let rowNum = 0
+         while (rowNum < matrix.length) {
+             matrix.forEach(column => {
+                 rowTestArray.push(column[rowNum])
+             })
+             let testResult = runTests(rowTestArray)
+             if (testResult) {
+                 return [testResult, true]
+             }
+             rowTestArray.length = 0
+             rowNum++
+         }
+    }
+
+    function checkForDiagLeftTopDown() {
+        let i = 0
+        // checks for diag l to r
+        for (let column of matrix) {
+            rowTestArray.push(column[i])
+            i++
+        }
+    
         let testResult = runTests(rowTestArray)
         if (testResult) {
             return [testResult, true]
         }
         rowTestArray.length = 0
-        rowNum++
     }
 
-    let i = 0
-    for (let column of matrix) {
-        rowTestArray.push(column[i])
-        i++
+    function checkForDiagRightTopDown() {
+        // checks for diag r to l
+        let i = matrix.length - 1
+        for (let column of matrix) {
+            rowTestArray.push(column[i])
+            i--
+        }
+    
+        testResult = runTests(rowTestArray)
+        if (testResult) {
+            return [testResult, true]
+        }
     }
-    let testResult = runTests(rowTestArray)
-    if (testResult) {
-        return [testResult, true]
-    }
-    rowTestArray.length = 0
-
-    i = matrix.length - 1
-    for (let column of matrix) {
-        rowTestArray.push(column[i])
-        i--
-    }
-
-    testResult = runTests(rowTestArray)
-    if (testResult) {
-        return [testResult, true]
-    }
-
-    return ['#', false]
 }

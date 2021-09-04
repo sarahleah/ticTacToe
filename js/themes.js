@@ -16,35 +16,18 @@ function handleThemeChange(event) {
 function changeColors() {
     let newDark = generateColor()
 
-        if (newDark[2] < 50) {
-            darkEl.style.color = '#EFE7DA'
-        } else {
-            darkEl.style.color = '#000'
-        }
+    if (newDark[2] < 50) {
+        darkEl.style.color = '#EFE7DA'
+    } else {
+        darkEl.style.color = '#000'
+    }
 
-        darkEl.style.backgroundColor = arrayToHSL(newDark)
+    darkEl.style.backgroundColor = arrayToHSL(newDark)
 
-        let newLight = generateColor()
-
-        checkFontColor(lightEls, newLight[2])
-        let lightElsColor = arrayToHSL(newLight)
-        lightEls.forEach(element => element.style.backgroundColor = lightElsColor)
-
-        let newAcc1 = generateColor()
-
-        checkFontColor(acc1Els, newAcc1[2])
-        let acc1ElsColor = arrayToHSL(newAcc1)
-        acc1Els.forEach(element => element.style.backgroundColor = acc1ElsColor)
-
-        let newAcc2 = generateColor()
-
-        if (newAcc2[2] < 50) {
-            acc2El.style.color = '#EFE7DA'
-        } else {
-            acc2El.style.color = '#000'
-        }
-
-        acc2El.style.backgroundColor = arrayToHSL(newAcc2)
+    changeLightColors()
+    changeAcc1Color()
+    changeAcc2Color()
+    
 }
 
 function generateColor() {
@@ -52,6 +35,34 @@ function generateColor() {
     let saturation = Math.floor(Math.random() * 100)
     let lightness = Math.floor(Math.random() * 100)
     return [hue, saturation, lightness]
+}
+
+function changeLightColors() {
+    let newLight = generateColor()
+    
+    checkFontColor(lightEls, newLight[2])
+    let lightElsColor = arrayToHSL(newLight)
+    lightEls.forEach(element => element.style.backgroundColor = lightElsColor)
+}
+
+function changeAcc1Color() {
+    let newAcc1 = generateColor()
+
+    checkFontColor(acc1Els, newAcc1[2])
+    let acc1ElsColor = arrayToHSL(newAcc1)
+    acc1Els.forEach(element => element.style.backgroundColor = acc1ElsColor)
+}
+
+function changeAcc2Color() {
+    let newAcc2 = generateColor()
+    
+    if (newAcc2[2] < 50) {
+        acc2El.style.color = '#EFE7DA'
+    } else {
+        acc2El.style.color = '#000'
+    }
+    
+    acc2El.style.backgroundColor = arrayToHSL(newAcc2)
 }
 
 function checkFontColor(list, lightness) {

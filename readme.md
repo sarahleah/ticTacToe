@@ -6,6 +6,7 @@ A simple game app created with HTML, CSS and JavaScript.
 
 * [Technologies](#technologies-used)
 * [Approach](#approach)
+* [Features](#features)
 * [Lessons Learned](#lessons-learned)
 * [Setup](#setup)
 * [Unsolved Problems](#unsolved-problems)
@@ -25,6 +26,13 @@ Approach:
 To start this project, I created a list of things that I wanted on the website. Using that list, I ranked it from most important to least, while also weighting each item on time required. 
 Having this plan to begin, I made a basic board and created the basic game logic, and hard-coded the minimum amount that would preform as expected. From there, I built each block of functionality on top of a solid base, and when it was working as expected, I moved onto the next. 
 During the course of creating this app, each functionality increased the level of flexibility every other function needed, so it forced me to gradually refactor my code as I went to maintain the same functionality. 
+
+Features: 
+----------------
+
+- Fully functional tic-tac-toe
+- Colour changing background and change of fonts when spacebar is pressed
+- Customizable gameboard size, player icons and player names
 
 Lessons Learned: 
 -----------------
